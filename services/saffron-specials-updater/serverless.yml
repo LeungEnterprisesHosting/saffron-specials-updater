@@ -1,0 +1,28 @@
+service: saffron-specials-updater
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  data:
+    handler: handler.data
+    events: 
+    - http:
+        path: /data
+        method: get
+        cors: true
+  saveNewData:
+    handler: handler.saveNewData
+    events:
+    - http:
+        path: /data
+        method: post
+        cors: true
+  login:
+    handler: handler.login
+    events:
+    - http:
+        path: /login
+        method: post
+        cors: true

@@ -1,0 +1,6 @@
+{
+  "resource": "/",
+  "path": "/login",
+  "httpMethod": "POST",
+  "body": "{\"username\":\"saffron\",\"password\":\"tiuejnfe8\"}"
+}

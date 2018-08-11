@@ -1,0 +1,6 @@
+{
+  "resource": "/",
+  "path": "/data",
+  "httpMethod": "POST",
+  "body": "{\"current\":{\"year\":\"2018\",\"month\":\"July-August\"},\"specials\":{\"appetizers\":[{\"name\":\"Spinach Chaat\",\"description\":\"Fresh spinach leaves dipped in chickpea batter, golden fried, topped with potatoes, chickpeas, yogurt, mint, and tamarind chutney.\",\"price\":6}],\"entrees\":[{\"name\":\"Tandoori Vegetables\",\"description\":\"Lightly spiced grilled vegetables and cubes of paneer, served with veg pulao rice, mint raita and tikka masala sauce.\",\"price\":15},{\"name\":\"Chicken Chapli Kabob\",\"description\":\"Grilled minced chicken patties, marinated with ginger, garlic and spices, served with veg pulao rice, mint raita and tikka masala sauce.\",\"price\":17},{\"name\":\"Lamb Bihari Kabob\",\"description\":\"Tender lamb cubes, lightly marinated grilled in the tandoor, served with veg pula rice, mint raita and tikka masala sauce.\",\"price\":19},{\"name\":\"Tandoori Salmon Tikka\",\"description\":\"Fresh Salmon fillets marinated with a touch of yogurt and light spices, cooked in the tandoor to perfection, served with veg pulao rice, mint raita and tikka masala sauce.\",\"price\":22}]}}"
+}
