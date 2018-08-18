@@ -80,6 +80,9 @@ class SaveModal extends Component {
                 Saffron specials page
               </a> in about 5 minutes.
             </p>
+            {confirmedSaving ? (
+              <p className="text-warning">Saving, please be patient...</p>
+            ) : null}
           </div>
           <div className="modal-footer" style={{ flexWrap: 'wrap' }}>
             <button
