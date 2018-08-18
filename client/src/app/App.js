@@ -11,7 +11,8 @@ import {
 import { Dashboard, Login } from './screens/';
 
 const StyledApp = styled.div`
-  min-height: 100%;
+  display: flex;
+  flex: 1;
   padding: 50px;
   background:
     linear-gradient(
@@ -22,12 +23,11 @@ const StyledApp = styled.div`
   background-attachment: fixed;
   background-size: cover;
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Source Sans Pro';
+  .form-control, button {
+    border-radius: 0;
   }
-
-  &, p {
-    font-family: 'Source Sans Pro';
+  .form-control::placeholder {
+    opacity: 0.25;
   }
 `;
 
@@ -59,6 +59,7 @@ class App extends Component {
 
   renderWithAuth({
     loggedIn,
+    logout,
     ...restProps,
   }) {
     if (!loggedIn) {
@@ -68,10 +69,15 @@ class App extends Component {
         />
       )
     }
+    // Need to pass this a few layers down, too,
+    // so attach to instance
+    this.logout = logout;
 
     return (
       <SpecialsProvider
         render={this.renderWithSpecials}
+        logout={logout}
+        {...restProps}
       />
     )
   }
@@ -80,6 +86,7 @@ class App extends Component {
     current,
     specials,
     loading,
+    error,
     ...restProps
   }) {
     if (loading) {
@@ -88,6 +95,24 @@ class App extends Component {
           <Spinner />
           <br />
           <p>Fetching data...</p>
+        </Centered>
+      )
+    }
+
+    if (error !== '') {
+      return (
+        <Centered>
+          <i className="fa fa-exclamation" />
+          <br />
+          <p>{error}</p>
+          <br />
+          <button
+            type="button"
+            className="btn btn-lg btn-danger"
+            onClick={this.logout}
+          >
+            Logout
+          </button>
         </Centered>
       )
     }
@@ -109,6 +134,7 @@ class App extends Component {
         {...restProps}
         specials={specials}
         current={current}
+        logout={this.logout}
       />
     );
   }

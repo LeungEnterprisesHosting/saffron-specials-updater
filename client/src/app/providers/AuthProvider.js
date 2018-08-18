@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { isNil } from 'lodash';
+
 import { ConfigContext } from '../providers/';
 
 class AuthProvider extends Component {
@@ -18,6 +20,13 @@ class AuthProvider extends Component {
     this.logout = this.logout.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (!isNil(token)) {
+      this.setState({ token, loggedIn: true });
+    }
   }
 
   async login(e) {
@@ -39,6 +48,7 @@ class AuthProvider extends Component {
       const { success, token } = data;
 
       if (success) {
+        localStorage.setItem('token', token);
         this.setState({
           loggingIn: false,
           loggedIn: true,
@@ -62,6 +72,7 @@ class AuthProvider extends Component {
   }
 
   logout() {
+    localStorage.removeItem('token');
     this.setState({
       loggedIn: false,
       token: '',

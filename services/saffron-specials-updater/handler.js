@@ -12,6 +12,12 @@ const {
   validateToken,
 } = require('./helpers');
 
+const corsHeaders = {
+  'Content-Type': 'application/json',
+  "Access-Control-Allow-Origin" : "*",
+  "Access-Control-Allow-Credentials" : true,
+};
+
 async function login(event, context, callback) {
   const { body } = event;
   const { username, password } = JSON.parse(body);
@@ -20,11 +26,7 @@ async function login(event, context, callback) {
 
   const response = {
     statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Credentials" : true,
-    },
+    headers: corsHeaders,
     body: JSON.stringify({ success, token }),
   }
 
@@ -34,14 +36,14 @@ async function login(event, context, callback) {
 async function data(event, context, callback) {
   const authorizationHeader = event.headers['Authorization'];
   if (isNil(authorizationHeader)) {
-    return callback(null, { statusCode: 403 });
+    return callback(null, { statusCode: 403, headers: corsHeaders });
   }
 
   const token = authorizationHeader.substr('Bearer '.length);
   const { success } = await validateToken(token);
 
   if (!success) {
-    return callback(null, { statusCode: 403 });
+    return callback(null, { statusCode: 403, headers: corsHeaders });
   }
 
   const monthYear = await getCurrentSpecialsMonthYear();
@@ -49,11 +51,7 @@ async function data(event, context, callback) {
 
   const response = {
     statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Credentials" : true,
-    },
+    headers: corsHeaders,
     body: JSON.stringify({
       current: monthYear,
       specials,
@@ -65,7 +63,7 @@ async function data(event, context, callback) {
 async function saveNewData(event, context, callback) {
   const authorizationHeader = event.headers['Authorization'];
   if (isNil(authorizationHeader)) {
-    return callback(null, { statusCode: 403 });
+    return callback(null, { statusCode: 403, headers: corsHeaders });
   }
 
   const token = authorizationHeader.substr('Bearer '.length);
@@ -80,11 +78,7 @@ async function saveNewData(event, context, callback) {
 
       const response = {
         statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin" : "*",
-          "Access-Control-Allow-Credentials" : true,
-        },
+        headers: corsHeaders,
         body: JSON.stringify({
           event,
           context
@@ -97,7 +91,7 @@ async function saveNewData(event, context, callback) {
     }
   }
   
-  return callback(null, { statusCode: 403 });
+  return callback(null, { statusCode: 403, headers: corsHeaders });
 }
 
 module.exports = {

@@ -122,12 +122,21 @@ class EditProvider extends Component {
     });
 
     await saveData(newData);
-    this.setState({
-      confirmedSaving: false,
-      saving: false,
-      editing: false,
-      saveIssues: [],
-    });
+
+    // Wait a bit extra so
+    // we're sure that GitHub
+    // will be updated when
+    // we reload
+    setTimeout(() => {
+      this.setState({
+        confirmedSaving: false,
+        saving: false,
+        editing: false,
+        saveIssues: [],
+      });
+      // Trigger page refresh to get new data
+      location.reload();
+    }, 3000);
   }
 
   onCancel() {

@@ -14,34 +14,63 @@ class SpecialsProvider extends Component {
         entrees: [],
       },
       loading: true,
+      error: '',
     };
 
     this.saveData = this.saveData.bind(this);
   }
 
   async componentDidMount() {
+    /*
     if (process.env.NODE_ENV === 'development') {
       const { body } = mockData;
       const { current, specials } = JSON.parse(body);
 
-      setTimeout(() => {
+      return setTimeout(() => {
         this.setState({
           current,
           specials,
           loading: false,
         })
-      }, /* 1500 */ 0);        
-    } else {
-      const { endpoint } = this.props;
+      }, 1500);        
+    }
+    */
+
+    try {
+      const { endpoint, token } = this.props;
+
+      this.setState({
+        error: '',
+      });
+
       const { data } =
-        await axios.get(`${endpoint}/data`);
-  
+        await axios
+          .get(`${endpoint}/data`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
       const { current, specials } = data;
       
       this.setState({
         current,
         specials,
         loading: false,
+      });
+    } catch (err) {
+      const { logout } = this.props;
+
+      // If we're here and this occurs, probably an old JWT
+      if (err.response && err.response.status === 403) {
+        return logout();
+      }
+
+      this.setState({
+        loading: false,
+        error: 'There was an error connecting to the server. ' +
+               'Please try again later. If the problem persists, ' +
+               'contact Nathan at hello@leungenterprises.com',
       });
     }
   }
@@ -54,7 +83,11 @@ class SpecialsProvider extends Component {
     } else {
       const { endpoint } = this.props;
       const { data } =
-        await axios.post(`${endpoint}/data`, newData);
+        await axios.post(`${endpoint}/data`, newData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
   
       return data;
     }

@@ -7,6 +7,7 @@
     "webpack:dev": "npm run webpack -- --mode=development -w",
     "webpack:prod": "npm run webpack -- --mode=production",
     "client:dev": "concurrently \"npm run webpack:dev\" \"http-server client/dist -p 3000\"",
+    "preclient:build": "rimraf client/dist",
     "client:build": "npm run webpack:prod",
     "test": "jest"
   },
@@ -33,6 +34,7 @@
     "http-server": "^0.11.1",
     "jest": "^23.5.0",
     "prettier": "^1.14.2",
+    "rimraf": "^2.6.2",
     "webpack-cli": "^3.1.0"
   }
 }

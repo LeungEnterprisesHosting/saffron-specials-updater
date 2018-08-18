@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ButtonContainer = styled.div`
   display: inline-block;
+  margin-left: 1.5rem;
   margin-right: 0.75rem;
 
   & > button:nth-child(2) {

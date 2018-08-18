@@ -10,6 +10,11 @@ import NewSpecial from './NewSpecial';
 import SaveModal from './SaveModal';
 
 const StyledDashboard = styled.div`
+  flex: 1;
+`;
+
+const LogoutButton = styled.button`
+  float: right;
 `;
 
 class Dashboard extends Component {
@@ -69,13 +74,14 @@ class Dashboard extends Component {
       specials,
       onChangeSpecials,
       onChangeAdding,
+      logout,
     } = this.props;
     const { appetizers, entrees } = specials;
 
     return (
       <StyledDashboard>
         <h1>
-          Saffron Specials Dashboard{" "}
+          Saffron Specials Dashboard
           <EditButtons 
             editing={editing}
             saving={saving}
@@ -83,15 +89,27 @@ class Dashboard extends Component {
             onSave={onSave}
             onCancel={onCancel}
           />
+          <LogoutButton
+            type="button"
+            onClick={logout}
+            className="btn btn-danger btn-lg"
+          >
+            <i className="fa fa-sign-out-alt" />{' '}
+            Logout
+          </LogoutButton>
         </h1>
-        <p>
+        <p
+          className="lead"
+          style={{ fontWeight: 'normal', marginTop: '1rem' }}
+        >
           Update this month's specials using this dashboard.
-          Click the "Edit" button to begin.
+          Click the "Edit Specials" button to begin.
           Any questions? Email Nathan at{' '}
           <a href="mailto:hello@leungenterprises.com">
             hello@leungenterprises.com
           </a>.
         </p>
+        <hr />
         <h2>Current Specials Month</h2>
         <p>
           The month you type here is exactly as how it will be shown on{' '}
@@ -107,7 +125,9 @@ class Dashboard extends Component {
           current={current}
           onChangeCurrent={onChangeCurrent}
         />
+        <hr />
         <h2>Current Specials</h2>
+        <p>Listed below are this month's specials.</p>
         <Row>
           <Col>
             <h3>Appetizers</h3>
@@ -116,8 +136,9 @@ class Dashboard extends Component {
               <Fragment>
                 <h4>Add New Appetizer</h4>
                 <p>
-                  Make sure you click the green '+' button
-                  to add your new appetizer to the list.
+                  Once you're done adding the new appetizer,
+                  make sure you click the green '+' button
+                  to add it to the list.
                 </p>
                 <NewSpecial
                   editing={editing}
@@ -141,8 +162,9 @@ class Dashboard extends Component {
               <Fragment>
                 <h4>Add New Entree</h4>
                 <p>
-                  Make sure you click the green '+' button
-                  to add your new entree to the list.
+                  Once you're done adding the new entree,
+                  make sure you click the green '+' button
+                  to add it to the list.
                 </p>
                 <NewSpecial
                   editing={editing}
