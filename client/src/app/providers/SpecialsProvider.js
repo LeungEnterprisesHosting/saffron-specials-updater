@@ -81,7 +81,7 @@ class SpecialsProvider extends Component {
         setTimeout(resolve, 1500);
       });
     } else {
-      const { endpoint } = this.props;
+      const { endpoint, token } = this.props;
       const { data } =
         await axios.post(`${endpoint}/data`, newData, {
           headers: {
