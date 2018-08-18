@@ -109,6 +109,11 @@ class Dashboard extends Component {
             hello@leungenterprises.com
           </a>.
         </p>
+        <p>
+          Note: if you just updated the specials, but this dashboard
+          is still showing the old specials, please wait. It can take
+          up to ten minutes for the site to update and your new Specials
+          to show up here.
         <hr />
         <h2>Current Specials Month</h2>
         <p>
