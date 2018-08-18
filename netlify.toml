@@ -1,7 +1,4 @@
 [build]
   base    = "client"
   publish = "client/dist"
-  command = "yarn build:client"
-
-[build.environment]
-  YARN_VERSION = "1.7.0"
+  command = "npm run build:client"
