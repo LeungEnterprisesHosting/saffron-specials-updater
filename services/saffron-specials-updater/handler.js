@@ -17,6 +17,12 @@ const corsHeaders = {
   "Access-Control-Allow-Origin" : "*",
   "Access-Control-Allow-Credentials" : true,
 };
+const noCacheHeaders = {
+  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0',
+};
+const baseHeaders = Object.assign({}, corsHeaders, noCacheHeaders);
 
 async function login(event, context, callback) {
   const { body } = event;
@@ -26,7 +32,7 @@ async function login(event, context, callback) {
 
   const response = {
     statusCode: 200,
-    headers: corsHeaders,
+    headers: baseHeaders,
     body: JSON.stringify({ success, token }),
   }
 
@@ -36,14 +42,14 @@ async function login(event, context, callback) {
 async function data(event, context, callback) {
   const authorizationHeader = event.headers['Authorization'];
   if (isNil(authorizationHeader)) {
-    return callback(null, { statusCode: 403, headers: corsHeaders });
+    return callback(null, { statusCode: 403, headers: baseHeaders });
   }
 
   const token = authorizationHeader.substr('Bearer '.length);
   const { success } = await validateToken(token);
 
   if (!success) {
-    return callback(null, { statusCode: 403, headers: corsHeaders });
+    return callback(null, { statusCode: 403, headers: baseHeaders });
   }
 
   const monthYear = await getCurrentSpecialsMonthYear();
@@ -51,7 +57,7 @@ async function data(event, context, callback) {
 
   const response = {
     statusCode: 200,
-    headers: corsHeaders,
+    headers: baseHeaders,
     body: JSON.stringify({
       current: monthYear,
       specials,
@@ -63,7 +69,7 @@ async function data(event, context, callback) {
 async function saveNewData(event, context, callback) {
   const authorizationHeader = event.headers['Authorization'];
   if (isNil(authorizationHeader)) {
-    return callback(null, { statusCode: 403, headers: corsHeaders });
+    return callback(null, { statusCode: 403, headers: baseHeaders });
   }
 
   const token = authorizationHeader.substr('Bearer '.length);
@@ -78,7 +84,7 @@ async function saveNewData(event, context, callback) {
 
       const response = {
         statusCode: 200,
-        headers: corsHeaders,
+        headers: baseHeaders,
         body: JSON.stringify({
           event,
           context
@@ -91,7 +97,7 @@ async function saveNewData(event, context, callback) {
     }
   }
   
-  return callback(null, { statusCode: 403, headers: corsHeaders });
+  return callback(null, { statusCode: 403, headers: baseHeaders });
 }
 
 module.exports = {
