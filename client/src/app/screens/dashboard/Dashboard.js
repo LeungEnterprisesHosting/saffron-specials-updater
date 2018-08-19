@@ -114,6 +114,7 @@ class Dashboard extends Component {
           is still showing the old specials, please wait. It can take
           up to ten minutes for the site to update and your new Specials
           to show up here.
+        </p>
         <hr />
         <h2>Current Specials Month</h2>
         <p>
