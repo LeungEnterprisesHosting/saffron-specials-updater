@@ -23,6 +23,10 @@ const StyledApp = styled.div`
   background-attachment: fixed;
   background-size: cover;
 
+  @media (max-width: 767px) {
+    padding: 15px;
+  }
+
   .form-control, button {
     border-radius: 0;
   }

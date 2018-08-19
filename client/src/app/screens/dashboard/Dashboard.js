@@ -11,10 +11,23 @@ import SaveModal from './SaveModal';
 
 const StyledDashboard = styled.div`
   flex: 1;
+
+  @media (max-width: 767px) {
+    position: relative;
+    padding-top: 80px;
+  }
 `;
 
 const LogoutButton = styled.button`
-  float: right;
+  @media (max-width: 767px) {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  @media (min-width: 768px) {
+    float: right;
+  }
 `;
 
 class Dashboard extends Component {

@@ -21,7 +21,7 @@ async function createToken({ username, password }) {
   const correctPassword = await bcrypt.compare(password, hash);
 
   return new Promise((resolve) => {
-    if (username === 'saffron' && correctPassword) {
+    if (username === process.env.USERNAME && correctPassword) {
       jwt.sign({}, process.env.JWT_SECRET, {
         expiresIn: '7d',
         issuer: ISSUER,

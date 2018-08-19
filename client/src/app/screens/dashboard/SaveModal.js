@@ -24,6 +24,12 @@ const StyledSaveModal = styled.div`
   }
 `;
 
+const SaveButton = styled.button`
+  @media (max-width: 767px) {
+    margin-top: 0.75rem;
+  }
+`
+
 class SaveModal extends Component {
   render() {
     const {
@@ -93,7 +99,7 @@ class SaveModal extends Component {
             >
               Cancel Saving and Continue Editing
             </button>
-            <button
+            <SaveButton
               type="button"
               className="btn btn-primary"
               onClick={onConfirmSave}
@@ -103,7 +109,7 @@ class SaveModal extends Component {
                 'Saving Changes...' :
                 'Save Changes and Publish'}
               
-            </button>
+            </SaveButton>
           </div>
         </StyledSaveModal>
       </Overlay>

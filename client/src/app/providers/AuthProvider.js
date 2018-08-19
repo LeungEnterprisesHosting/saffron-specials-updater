@@ -76,6 +76,8 @@ class AuthProvider extends Component {
     this.setState({
       loggedIn: false,
       token: '',
+      username: '',
+      password: '',
     });
   }
 

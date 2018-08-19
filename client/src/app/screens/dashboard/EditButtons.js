@@ -6,8 +6,18 @@ const ButtonContainer = styled.div`
   margin-left: 1.5rem;
   margin-right: 0.75rem;
 
+  @media (max-width: 767px) {
+    margin-left: 0;
+    margin-top: 0.75rem;
+  }
+
   & > button:nth-child(2) {
     margin-left: 0.375rem;
+
+    @media (max-width: 767px) {
+      margin-left: 0;
+      margin-top: 0.75rem;
+    }
   }
 `;
 

@@ -21,7 +21,6 @@ class SpecialsProvider extends Component {
   }
 
   async componentDidMount() {
-    /*
     if (process.env.NODE_ENV === 'development') {
       const { body } = mockData;
       const { current, specials } = JSON.parse(body);
@@ -34,7 +33,6 @@ class SpecialsProvider extends Component {
         })
       }, 1500);        
     }
-    */
 
     try {
       const { endpoint, token } = this.props;

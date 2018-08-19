@@ -10,6 +10,10 @@ const StyledLogin = styled.div`
 
 const Main = styled.div`
   width: 50%;
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
 `;
 
 const Label = styled.label`
